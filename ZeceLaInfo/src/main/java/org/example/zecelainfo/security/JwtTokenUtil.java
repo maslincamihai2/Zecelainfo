@@ -4,15 +4,16 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.example.zecelainfo.models.User;
+import org.example.zecelainfo.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cglib.core.internal.Function;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.example.zecelainfo.models.User.Role;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class JwtTokenUtil implements Serializable {
@@ -21,6 +22,9 @@ public class JwtTokenUtil implements Serializable {
 
     //@Value("${jwt.secret}")
     private String secret = "mysecretkey";
+
+    @Autowired
+    private UserRepository userRepository;
 
     //retrieve username from jwt token
     public String getEmailFromToken(String token) {
@@ -71,9 +75,19 @@ public class JwtTokenUtil implements Serializable {
     }
 
     //validate token
-    public Boolean validateToken(String token, User user) {
+    public Optional<String> validateToken(String token, ArrayList<Role> roles) {
         final String email = getEmailFromToken(token);
-        return (email.equals(user.getEmail()) && !isTokenExpired(token));
+        Optional<User> user = userRepository.findByEmail(email);
+
+        if(!isTokenExpired(token) && user.isPresent() && roles.contains(user.get().getRol())){
+            return Optional.of(email);
+
+        }
+        return Optional.empty();
+    }
+
+    public Optional<User> getUserWithEmail(String email){
+        return userRepository.findByEmail(email);
     }
 }
 

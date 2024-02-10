@@ -2,6 +2,8 @@ package org.example.zecelainfo.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Clasa")
 public class Clasa {
@@ -12,9 +14,8 @@ public class Clasa {
     @Column(name = "nume", nullable = false, length = 20)
     private String nume;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "nivel", nullable = false)
-    private Nivel nivel;
+    private String nivel;
 
     @Column(name = "judet", nullable = false, length = 20)
     private String judet;
@@ -24,6 +25,10 @@ public class Clasa {
 
     @Column(name = "unitate_scolara", nullable = false, length = 40)
     private String unitateScolara;
+
+    @OneToMany(mappedBy = "clasa", cascade = CascadeType.REMOVE)
+    private List<UserClasa> userClasas;
+
 
     // Getters and Setters
 
@@ -44,11 +49,11 @@ public class Clasa {
         this.nume = nume;
     }
 
-    public Nivel getNivel() {
+    public String getNivel() {
         return nivel;
     }
 
-    public void setNivel(Nivel nivel) {
+    public void setNivel(String nivel) {
         this.nivel = nivel;
     }
 
@@ -74,9 +79,5 @@ public class Clasa {
 
     public void setUnitateScolara(String unitateScolara) {
         this.unitateScolara = unitateScolara;
-    }
-
-    public enum Nivel {
-        _9, _10, _11, _12
     }
 }

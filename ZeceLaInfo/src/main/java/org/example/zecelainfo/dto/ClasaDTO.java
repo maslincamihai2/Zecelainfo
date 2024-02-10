@@ -1,5 +1,7 @@
 package org.example.zecelainfo.dto;
 
+import org.example.zecelainfo.models.Clasa;
+
 public class ClasaDTO {
     private String nume;
     private String nivel;

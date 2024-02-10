@@ -11,7 +11,7 @@ public class Tema {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "idClasa", nullable = false)
     private Clasa clasa;
 
