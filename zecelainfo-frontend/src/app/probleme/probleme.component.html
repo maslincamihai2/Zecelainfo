@@ -1,0 +1,11 @@
+<h2>Arhiva Probleme</h2>
+<ol>
+  <li *ngFor="let problem of probleme" (click)="navigateToProblem(problem.id)">
+    <div>{{ problem.nume}}</div>
+    <div>{{ problem.cerinta }}</div>
+    <div>Dificultate: {{ problem.dificultate }}</div>
+    <div>Categorie: {{ problem.categorie }}</div>
+  </li>
+</ol>
+
+<button routerLink="/probleme-new">Adauga problema</button>

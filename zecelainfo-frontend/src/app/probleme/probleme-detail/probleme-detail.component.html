@@ -1,0 +1,22 @@
+<h2>{{problema.nume}}</h2>
+<div>{{ problema.cerinta }}</div>
+<div>Dificultate: {{ problema.dificultate }}</div>
+<div>Categorie: {{ problema.categorie }}</div>
+
+<div class="source-code-submit">
+    <h3>Rezolva:</h3>
+    <textarea [(ngModel)]="sourceCode" placeholder="Enter your source code here..." rows="10" cols="50"></textarea>
+    <button (click)="submitSolution()">Submit Solution</button>
+  </div>
+
+<div class="user-solutions">
+<h3>Solutii anterioare</h3>
+<div *ngFor="let solution of userSolutions">
+    <p>Punctaj: {{ solution.punctaj }}</p>
+    <pre>Cod sursa: {{ solution.cod_sursa }}</pre>
+</div>
+</div>
+  
+
+<button (click)="deleteProblem()">Sterge problema</button>
+

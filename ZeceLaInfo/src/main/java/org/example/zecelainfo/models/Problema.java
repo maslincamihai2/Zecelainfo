@@ -15,17 +15,14 @@ public class Problema {
     @Column(name = "cerinta", nullable = false, length = 1000)
     private String cerinta;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "dificultate", nullable = false)
-    private Dificultate dificultate;
+    private String dificultate;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "categorie", nullable = false)
-    private Categorie categorie;
+    private String categorie;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "subcategorie", nullable = false)
-    private Subcategorie subcategorie;
+    private String subcategorie;
 
     // Getters and Setters
 
@@ -53,40 +50,28 @@ public class Problema {
         this.cerinta = cerinta;
     }
 
-    public Dificultate getDificultate() {
+    public String getDificultate() {
         return dificultate;
     }
 
-    public void setDificultate(Dificultate dificultate) {
+    public void setDificultate(String dificultate) {
         this.dificultate = dificultate;
     }
 
-    public Categorie getCategorie() {
+    public String getCategorie() {
         return categorie;
     }
 
-    public void setCategorie(Categorie categorie) {
+    public void setCategorie(String categorie) {
         this.categorie = categorie;
     }
 
-    public Subcategorie getSubcategorie() {
+    public String getSubcategorie() {
         return subcategorie;
     }
 
-    public void setSubcategorie(Subcategorie subcategorie) {
+    public void setSubcategorie(String subcategorie) {
         this.subcategorie = subcategorie;
-    }
-
-    public enum Dificultate {
-        USOARA, MEDIE, DIFICILA, CONCURS
-    }
-
-    public enum Categorie {
-        ALGORITMI_ELEMENTARI, SUBPROGRAME, RECURSIVITATE
-    }
-
-    public enum Subcategorie {
-        PROBLEME_DIVERSE, DIVIZIBILITATE, SUBPROGRAME_CU_SIRURI_DE_CARACTERE, SUBPROGRAME_RECURSIVE
     }
 }
 

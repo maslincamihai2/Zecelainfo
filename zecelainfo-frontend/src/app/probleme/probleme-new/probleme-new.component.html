@@ -1,0 +1,41 @@
+<div class="problema-new-container">
+    <h2>Add New Problema</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div>
+        <label for="nume">Nume:</label>
+        <input type="text" id="nume" [(ngModel)]="problema.nume" name="nume" required>
+      </div>
+      <div>
+        <label for="cerinta">Cerinta:</label>
+        <textarea id="cerinta" [(ngModel)]="problema.cerinta" name="cerinta" required></textarea>
+      </div>
+      <div>
+        <label for="dificultate">Dificultate:</label>
+        <select id="dificultate" [(ngModel)]="problema.dificultate" name="dificultate" required>
+          <option value="usoara">Usoara</option>
+          <option value="medie">Medie</option>
+          <option value="dificila">Dificila</option>
+          <option value="concurs">Concurs</option>
+        </select>
+      </div>
+      <div>
+        <label for="categorie">Categorie:</label>
+        <select id="categorie" [(ngModel)]="problema.categorie" name="categorie" required>
+          <option value="algoritmi elementari">Algoritmi Elementari</option>
+          <option value="subprograme">Subprograme</option>
+          <option value="recursivitate">Recursivitate</option>
+        </select>
+      </div>
+      <div>
+        <label for="subcategorie">Subcategorie:</label>
+        <select id="subcategorie" [(ngModel)]="problema.subcategorie" name="subcategorie" required>
+          <option value="probleme diverse">Probleme Diverse</option>
+          <option value="divizibilitate">Divizibilitate</option>
+          <option value="subprograme cu siruri de caractere">Subprograme cu Siruri de Caractere</option>
+          <option value="subprograme recursive">Subprograme Recursive</option>
+        </select>
+      </div>
+      <button type="submit">Create Problema</button>
+    </form>
+  </div>
+  

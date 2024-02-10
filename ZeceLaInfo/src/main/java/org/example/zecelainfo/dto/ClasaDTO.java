@@ -19,7 +19,7 @@ public class ClasaDTO {
         this.nume = nume;
     }
 
-    public String getNivel() {
+    public String    getNivel() {
         return nivel;
     }
 

@@ -27,7 +27,7 @@ public class ClasaController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @PostMapping("/create")
+    @PostMapping()
     public ResponseEntity<?> createClasa(@RequestHeader(HttpHeaders.AUTHORIZATION) String token, @RequestBody ClasaDTO ClasaDto){
         Optional<String> validated_email = jwtTokenUtil.validateToken(
                 token,
@@ -40,7 +40,7 @@ public class ClasaController {
         return ResponseEntity.ok("error");
     }
 
-    @GetMapping("/list")
+    @GetMapping()
     public ResponseEntity<?> listClasses(@RequestHeader(HttpHeaders.AUTHORIZATION) String token){
         Optional<String> validated_email = jwtTokenUtil.validateToken(
                 token,
@@ -83,7 +83,7 @@ public class ClasaController {
     public ResponseEntity<?> deleteClass(@RequestHeader(HttpHeaders.AUTHORIZATION) String token, @PathVariable Integer id){
         Optional<String> validated_email = jwtTokenUtil.validateToken(
                 token,
-                new ArrayList<>(Arrays.asList(User.Role.profesor, User.Role.admin, User.Role.elev)));
+                new ArrayList<>(Arrays.asList(User.Role.profesor, User.Role.admin)));
 
         if (validated_email.isPresent()){
             Clasa_service.delete(id, validated_email.get());
@@ -91,15 +91,4 @@ public class ClasaController {
         }
         return ResponseEntity.ok("error");
     }
-
-//    @PostMapping("/login")
-//    public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO){
-//        Optional<String> response = userService.loginUser(loginDTO);
-//        return ResponseEntity.ok(response);
-//    }
-//
-//    @GetMapping("/{email}")
-//    public Optional<User> getUserByEmail(@PathVariable String email) {
-//        return userService.findByEmail(email);
-//    }
 }
