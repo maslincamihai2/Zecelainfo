@@ -1,4 +1,4 @@
-package org.example.zecelainfo.services;
+package org.example.zecelainfo.services.interfaces;
 
 import org.example.zecelainfo.dto.LoginDTO;
 import org.example.zecelainfo.dto.RegistrationDTO;
@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface UserService {
     Optional<User> findByEmail(String email);
     User registerUser(RegistrationDTO registrationDTO);
-    Optional<User> loginUser(LoginDTO loginDTO);
+    Optional<String> loginUser(LoginDTO loginDTO);
 }

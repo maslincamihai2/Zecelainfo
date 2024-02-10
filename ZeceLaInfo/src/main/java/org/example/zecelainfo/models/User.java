@@ -97,7 +97,7 @@ public class User {
 
     // Enum for user roles
     public enum Role {
-        ELEV, PROFESOR, ADMIN
+        elev, profesor, admin
     }
 
     // Optionally, override toString(), equals(), and hashCode() methods

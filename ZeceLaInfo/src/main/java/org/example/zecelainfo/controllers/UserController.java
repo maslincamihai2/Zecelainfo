@@ -3,7 +3,7 @@ package org.example.zecelainfo.controllers;
 import org.example.zecelainfo.dto.LoginDTO;
 import org.example.zecelainfo.dto.RegistrationDTO;
 import org.example.zecelainfo.models.User;
-import org.example.zecelainfo.services.UserService;
+import org.example.zecelainfo.services.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +25,9 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO){
-        Optional<User> user = userService.loginUser(loginDTO);
-        return ResponseEntity.ok(user);
+        Optional<String> response = userService.loginUser(loginDTO);
+        return ResponseEntity.ok(response);
     }
-    //public User registerUser(@RequestBody User user) {
-        //return userService.saveUser(user);
-            //}
 
     @GetMapping("/{email}")
     public Optional<User> getUserByEmail(@PathVariable String email) {

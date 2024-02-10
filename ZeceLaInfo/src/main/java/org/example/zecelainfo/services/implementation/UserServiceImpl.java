@@ -1,8 +1,10 @@
-package org.example.zecelainfo.services;
+package org.example.zecelainfo.services.implementation;
 
 import org.example.zecelainfo.dto.LoginDTO;
 import org.example.zecelainfo.models.User;
 import org.example.zecelainfo.repositories.UserRepository;
+import org.example.zecelainfo.security.JwtTokenUtil;
+import org.example.zecelainfo.services.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,15 +34,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> loginUser(LoginDTO loginDTO) {
-        return userRepository.findByEmailAndParola(loginDTO.getEmail(), loginDTO.getPassword());
+    public Optional<String> loginUser(LoginDTO loginDTO) {
+        Optional<User> user = userRepository.findByEmail(loginDTO.getEmail());
+
+        if (user.isPresent() && passwordEncoder.matches(loginDTO.getParola(), user.get().getParola())){
+            JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
+            final String token = jwtTokenUtil.generateToken(user.get());
+            return Optional.of(token);
+        }
+
+        return Optional.empty();
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-
-
 
 }
